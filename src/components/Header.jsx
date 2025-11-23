@@ -10,8 +10,7 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom'; //Para manejar estilos según la ruta
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext.jsx";
-import logo from '../assets/logo-v2.png';
-
+import logo from '../assets/logoderemate.png';
 
 
 
