@@ -1,0 +1,19 @@
+
+/* Paginación (los puntitos) */
+.slider-container .swiper-pagination-bullet {
+  background: #fff !important;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.slider-container .swiper-pagination-bullet-active {
+  background: #00bcd4 !important; /* color destacado */
+  transform: scale(1.2);
+}
+
+/* Flechas de navegación */
+.slider-container .swiper-button-prev,
+.slider-container .swiper-button-next {
+  color: #fff !important;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
