@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom'; //Para manejar estilos según la ruta
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext.jsx";
-import logo from '../assets/logoderemate.png';
 
 
 
@@ -48,7 +47,7 @@ function Header(props) {
                         {/*Logo + marca*/}
                         <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, gap: 1 }}>
                             <Link to={'/'}>
-                                <Avatar sx={{ height: 90, width: 90 }} src={logo}></Avatar>
+                                <Avatar sx={{ height: 90, width: 90 }} src="/logo-deremate-2025.png"></Avatar>
                             </Link>
                             <Button component={Link} to={'/mates'} sx={{
                                 color: 'white', textTransform: 'none', fontSize: 15, marginLeft: 6,
