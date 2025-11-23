@@ -55,7 +55,7 @@ function Footer() {
                             <Avatar sx={{
                                 height: 140, width: 140, transition: "transform 0.3s, color 0.3s",
                                 "&:hover": { transform: "scale(1.2)" }
-                            }} src='\public\logo-deremate-sin-fondo.png'></Avatar>
+                            }} src='\logo-deremate-2025.png'></Avatar>
                         </Tooltip>
                     </Link>
                 </Box>
