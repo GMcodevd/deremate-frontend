@@ -47,7 +47,7 @@ function Header(props) {
                         {/*Logo + marca*/}
                         <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, gap: 1 }}>
                             <Link to={'/'}>
-                                <Avatar sx={{ height: 90, width: 90 }} src='/logo.png'></Avatar>
+                                <Avatar sx={{ height: 90, width: 90 }} src='/logo-v2.png'></Avatar>
                             </Link>
                             <Button component={Link} to={'/mates'} sx={{
                                 color: 'white', textTransform: 'none', fontSize: 15, marginLeft: 6,
