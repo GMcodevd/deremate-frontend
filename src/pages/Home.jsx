@@ -38,12 +38,9 @@ function Home() {
     }, [location]);
 
     useEffect(() => {
-        // Ajusta altura del header dinámicamente
         if (headerRef.current) {
             setHeaderHeight(headerRef.current.offsetHeight);
         }
-
-        // Recalcula si la ventana cambia de tamaño
         const handleResize = () => {
             if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
         };
