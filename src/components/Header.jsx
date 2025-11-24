@@ -1,27 +1,26 @@
-import React from 'react';
-import Box from '@mui/material/Box';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import { Avatar, Button, TextField, InputAdornment, IconButton } from '@mui/material';
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import {
+    AppBar,
+    Toolbar,
+    Box,
+    Avatar,
+    Button,
+    TextField,
+    InputAdornment,
+    IconButton,
+    Typography
+} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom'; //Para manejar estilos según la ruta
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "./context/AuthContext.jsx";
-
-
+import { useAuth } from './context/AuthContext.jsx';
 
 function Header(props) {
     const location = useLocation();
     const isHome = location.pathname === '/';
-
-    const navigate = useNavigate()
-
-    const [search, setSearch] = useState('');
+    const navigate = useNavigate();
 
     const { isUserLogged, logout } = useAuth();
+    const [search, setSearch] = useState('');
 
     const handleLogout = () => {
         logout();
@@ -29,154 +28,111 @@ function Header(props) {
     };
 
     const handleClick = () => {
-        props.handleChange(search)
+        props.handleChange(search);
         navigate("/busqueda");
-    }
+    };
+
+    const buttons = [
+        { label: 'Mates', to: '/mates' },
+        { label: 'Bombillas', to: '/bombillas' },
+        { label: 'Termos', to: '/termos' },
+        { label: 'Combos', to: '/combos' },
+        { label: 'Accesorios', to: '/accesorios' },
+        { label: 'Contacto', to: '/contacto' },
+    ];
 
     return (
-        <AppBar position="absolute"
+        <AppBar
+            position="absolute"
             elevation={0}
             sx={{
                 backgroundColor: isHome ? 'transparent' : 'rgba(15, 15, 15, 0.95)',
                 boxShadow: isHome ? 'none' : '0px 2px 4px rgba(0,0,0,0.2)',
-            }}>
-            <Toolbar>
-                <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                    <Box sx={{
+            }}
+        >
+            <Toolbar sx={{ flexDirection: { xs: 'column', sm: 'row' }, alignItems: 'center', gap: 1 }}>
+                {/* Logo */}
+                <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: { xs: 0, sm: 1 }, gap: 1 }}>
+                    <Link to="/">
+                        <Avatar sx={{ height: { xs: 60, sm: 90 }, width: { xs: 60, sm: 90 } }} src="/logo-deremate-2025.png" />
+                    </Link>
+                </Box>
+
+                {/* Botones de navegación */}
+                <Box
+                    sx={{
                         display: 'flex',
-                        flexDirection: { xs: 'column', sm: 'row' }, // columnas en móvil
-                        alignItems: 'center', gap: 2, marginTop: 1, width: '100%'
-                    }}>
-
-                        {/*Logo + marca*/}
-                        <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, gap: 1, flexWrap: 'wrap' }}>
-                            <Link to={'/'}>
-                                <Avatar sx={{ height: 90, width: 90 }} src="/logo-deremate-2025.png"></Avatar>
-                            </Link>
-                            <Button component={Link} to={'/mates'} sx={{
-                                color: 'white', textTransform: 'none', fontSize: { xs: 12, sm: 14, md: 15 }, // más pequeño en móviles 
-                                marginLeft: 6,
-                                flex: { xs: '1 1 45%', sm: '0 0 auto' }, // 2 botones por línea en móvil
-
+                        flexWrap: 'wrap',
+                        justifyContent: { xs: 'center', sm: 'flex-start' },
+                        gap: 1,
+                        flexGrow: 1,
+                    }}
+                >
+                    {buttons.map((btn) => (
+                        <Button
+                            key={btn.label}
+                            component={Link}
+                            to={btn.to}
+                            sx={{
+                                color: 'white',
+                                textTransform: 'none',
+                                fontSize: { xs: 12, sm: 15 },
+                                flex: { xs: '1 1 45%', sm: '0 0 auto' },
                                 '&:hover': {
                                     backgroundColor: isHome
                                         ? 'rgba(255, 255, 255, 0.25)'
-                                        : 'rgba(255, 255, 255, 0.15)'
-                                }
-                            }}>
-                                Mates
-                            </Button>
+                                        : 'rgba(255, 255, 255, 0.15)',
+                                },
+                            }}
+                        >
+                            {btn.label}
+                        </Button>
+                    ))}
 
-                            <Button component={Link} to={'/bombillas'} sx={{
-                                color: 'white', textTransform: 'none', fontSize: 15, '&:hover': {
+                    {isUserLogged && (
+                        <Button
+                            onClick={handleLogout}
+                            sx={{
+                                color: 'white',
+                                textTransform: 'none',
+                                fontSize: { xs: 12, sm: 15 },
+                                flex: { xs: '1 1 45%', sm: '0 0 auto' },
+                                '&:hover': {
                                     backgroundColor: isHome
                                         ? 'rgba(255, 255, 255, 0.25)'
-                                        : 'rgba(255, 255, 255, 0.15)'
-                                }
-                            }}>
+                                        : 'rgba(255, 255, 255, 0.15)',
+                                },
+                            }}
+                        >
+                            Cerrar sesión
+                        </Button>
+                    )}
+                </Box>
 
-                                Bombillas
-
-                            </Button>
-
-                            <Button component={Link} to={'/termos'} sx={{
-                                color: 'white', textTransform: 'none', fontSize: 15, '&:hover': {
-                                    backgroundColor: isHome
-                                        ? 'rgba(255, 255, 255, 0.25)'
-                                        : 'rgba(255, 255, 255, 0.15)'
-                                }
-                            }}>
-
-                                Termos
-
-                            </Button>
-
-                            <Button component={Link} to={'/combos'} sx={{
-                                color: 'white', textTransform: 'none', fontSize: 15, '&:hover': {
-                                    backgroundColor: isHome
-                                        ? 'rgba(255, 255, 255, 0.25)'
-                                        : 'rgba(255, 255, 255, 0.15)'
-                                }
-                            }}>
-
-                                Combos
-
-                            </Button>
-
-                            <Button component={Link} to={'/accesorios'} sx={{
-                                color: 'white', textTransform: 'none', fontSize: 15, '&:hover': {
-                                    backgroundColor: isHome
-                                        ? 'rgba(255, 255, 255, 0.25)'
-                                        : 'rgba(255, 255, 255, 0.15)'
-                                }
-                            }}>
-
-                                Accesorios
-
-                            </Button>
-
-                            <Button component={Link} to={'/contacto'} sx={{
-                                color: 'white', textTransform: 'none', fontSize: 15, '&:hover': {
-                                    backgroundColor: isHome
-                                        ? 'rgba(255, 255, 255, 0.25)'
-                                        : 'rgba(255, 255, 255, 0.15)'
-                                }
-                            }}>
-
-                                Contacto
-
-                            </Button>
-
-                            {isUserLogged && (
-                                <Button
-                                    onClick={handleLogout}
-                                    sx={{
-                                        color: 'white',
-                                        textTransform: 'none',
-                                        fontSize: 15,
-                                        marginLeft: 2,
-                                        '&:hover': {
-                                            backgroundColor: isHome
-                                                ? 'rgba(255, 255, 255, 0.25)'
-                                                : 'rgba(255, 255, 255, 0.15)'
-                                        }
-                                    }}
-                                >
-                                    Cerrar sesión
-                                </Button>
-                            )}
-
-                        </Box>
-
-                        {/*Buscador + Button*/}
-                        {/* Buscador con icono */}
-                        <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center', mr: 5 }}>
-                            <TextField
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                                placeholder="Buscar Productos..."
-                                size="small"
-                                sx={{ flex: 1, backgroundColor: isHome ? "#ffffff8f" : "#2a2a2a", maxWidth: 220, ml: 3, height: 36, alignContent: 'center', justifyContent: 'center', '& input': { color: isHome ? 'black' : 'white', }, }}
-                                InputProps={{
-                                    endAdornment: (
-                                        <InputAdornment position="end" sx={{ cursor: 'pointer' }} onClick={handleClick}>
-                                            <SearchIcon sx={{ color: isHome ? 'white' : '#cccccc' }} />
-                                        </InputAdornment>
-                                    ),
-                                }}>
-                            </TextField>
-                            <Typography>
-
-                            </Typography>
-
-
-                        </Box>
-                    </Box>
+                {/* Buscador */}
+                <Box sx={{ mt: { xs: 1, sm: 0 }, width: { xs: '100%', sm: 'auto' }, flexGrow: { xs: 0, sm: 0 } }}>
+                    <TextField
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder="Buscar Productos..."
+                        size="small"
+                        fullWidth
+                        sx={{
+                            backgroundColor: isHome ? '#ffffff8f' : '#2a2a2a',
+                            '& input': { color: isHome ? 'black' : 'white' },
+                        }}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end" sx={{ cursor: 'pointer' }} onClick={handleClick}>
+                                    <SearchIcon sx={{ color: isHome ? 'white' : '#cccccc' }} />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
                 </Box>
             </Toolbar>
-        </AppBar >
+        </AppBar>
     );
 }
-
 
 export default Header;
