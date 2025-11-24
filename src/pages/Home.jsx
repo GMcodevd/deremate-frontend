@@ -24,23 +24,16 @@ import ContactoPage from './ContactoPage.jsx';
 
 function Home() {
     const location = useLocation();
-
-    // Ref para medir altura real del header
     const headerRef = useRef(null);
     const [headerHeight, setHeaderHeight] = useState(0);
+    const extraPadding = 50; // padding extra para que nunca queden pegadas las secciones
 
     useEffect(() => {
-        if (location.pathname === "/") {
-            document.body.className = "body-dark";
-        } else {
-            document.body.className = "body-light";
-        }
+        document.body.className = location.pathname === "/" ? "body-dark" : "body-light";
     }, [location]);
 
     useEffect(() => {
-        if (headerRef.current) {
-            setHeaderHeight(headerRef.current.offsetHeight);
-        }
+        if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
         const handleResize = () => {
             if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
         };
@@ -57,11 +50,7 @@ function Home() {
     const fetchData = async (param) => {
         try {
             const response = await getAllProducts(param);
-            if (!Array.isArray(response.data)) {
-                setProducts([]);
-                return;
-            }
-            setProducts(response.data);
+            setProducts(Array.isArray(response.data) ? response.data : []);
         } catch (error) {
             console.error({ mensaje: 'error al obtener productos', error });
             setProducts([]);
@@ -77,9 +66,10 @@ function Home() {
         );
     });
 
+    const sectionPadding = headerHeight + extraPadding;
+
     return (
         <div className='home-container'>
-            {/* Header con ref */}
             <header ref={headerRef}>
                 <Header handleChange={handleChange} />
             </header>
@@ -95,7 +85,7 @@ function Home() {
                                 <Slider />
                             </section>
 
-                            {/* Secciones de inicio sin empujar el slider */}
+                            {/* Secciones de inicio */}
                             <div className='inicio-secciones'>
                                 <section id='menu-opciones'>
                                     <MenuOpciones />
@@ -110,51 +100,51 @@ function Home() {
                         </>
                     } />
 
-                    {/* Rutas internas: se empujan según headerHeight */}
+                    {/* Rutas internas: se empujan según headerHeight + extraPadding */}
                     <Route path='/mates' element={
-                        <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                        <div className='seccion-interna' style={{ paddingTop: sectionPadding }}>
                             <MatesPage products={products} />
                         </div>
                     } />
                     <Route path='/termos' element={
-                        <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                        <div className='seccion-interna' style={{ paddingTop: sectionPadding }}>
                             <TermosPage products={products} />
                         </div>
                     } />
                     <Route path='/combos' element={
-                        <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                        <div className='seccion-interna' style={{ paddingTop: sectionPadding }}>
                             <CombosPage products={products} />
                         </div>
                     } />
                     <Route path='/bombillas' element={
-                        <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                        <div className='seccion-interna' style={{ paddingTop: sectionPadding }}>
                             <BombillasPage products={products} />
                         </div>
                     } />
                     <Route path='/accesorios' element={
-                        <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                        <div className='seccion-interna' style={{ paddingTop: sectionPadding }}>
                             <AccesoriosPage products={products} />
                         </div>
                     } />
                     <Route path='/busqueda' element={
-                        <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                        <div className='seccion-interna' style={{ paddingTop: sectionPadding }}>
                             <BusquedaUser products={searchTerm ? filteredProducts : products} searchTerm={searchTerm} />
                         </div>
                     } />
                     <Route path='/todos-los-productos' element={
-                        <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                        <div className='seccion-interna' style={{ paddingTop: sectionPadding }}>
                             <TodosLosProductos products={products} />
                         </div>
                     } />
                     <Route path='/contacto' element={
-                        <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                        <div className='seccion-interna' style={{ paddingTop: sectionPadding }}>
                             <ContactoPage />
                         </div>
                     } />
                     <Route path='/login' element={<Login />} />
                     <Route element={<PrivateRoute />}>
                         <Route path='/panel' element={
-                            <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                            <div className='seccion-interna' style={{ paddingTop: sectionPadding }}>
                                 <PanelAdmin products={products} setProducts={setProducts} />
                             </div>
                         } />
