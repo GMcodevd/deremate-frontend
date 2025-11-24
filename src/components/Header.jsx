@@ -42,15 +42,22 @@ function Header(props) {
             }}>
             <Toolbar>
                 <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, marginTop: 1, width: '100%' }}>
+                    <Box sx={{
+                        display: 'flex',
+                        flexDirection: { xs: 'column', sm: 'row' }, // columnas en móvil
+                        alignItems: 'center', gap: 2, marginTop: 1, width: '100%'
+                    }}>
 
                         {/*Logo + marca*/}
-                        <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, gap: 1 }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, gap: 1, flexWrap: 'wrap' }}>
                             <Link to={'/'}>
                                 <Avatar sx={{ height: 90, width: 90 }} src="/logo-deremate-2025.png"></Avatar>
                             </Link>
                             <Button component={Link} to={'/mates'} sx={{
-                                color: 'white', textTransform: 'none', fontSize: 15, marginLeft: 6,
+                                color: 'white', textTransform: 'none', fontSize: { xs: 12, sm: 14, md: 15 }, // más pequeño en móviles 
+                                marginLeft: 6,
+                                flex: { xs: '1 1 45%', sm: '0 0 auto' }, // 2 botones por línea en móvil
+
                                 '&:hover': {
                                     backgroundColor: isHome
                                         ? 'rgba(255, 255, 255, 0.25)'
