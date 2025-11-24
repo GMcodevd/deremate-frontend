@@ -29,8 +29,10 @@ body.body-light .home-container {
   text-align: center;
   width: 100%;
   margin-bottom: 200px;
-  padding-top: 0;
-  /* el padding real lo maneja Home.jsx dinámicamente */
+
+  /* PADDING DINÁMICO PARA NO TAPAR SECCIONES */
+  padding-top: 150px;
+  /* PC: ajustar según altura del header */
 }
 
 /* Footer */
@@ -64,6 +66,10 @@ body.body-light .home-container {
   .home-container main {
     padding-left: 1rem;
     padding-right: 1rem;
+
+    /* PADDING DINÁMICO PARA NO TAPAR SECCIONES EN MÓVIL */
+    padding-top: 180px;
+    /* móvil: ajustar según altura del header */
   }
 }
 
@@ -101,9 +107,19 @@ body.body-light .home-container {
   border-left: 6px solid #d4af37;
   border-radius: 4px;
   margin-top: 0;
-  /* ahora el espacio lo maneja padding-top dinámico de main */
+  /* el espacio superior lo maneja padding-top de main */
   margin-bottom: 2rem;
   padding: 10px 20px;
   padding-left: 2rem;
   transition: color 0.3s ease, background 0.3s ease;
+}
+
+/* Opcional: ajustar slider u otras secciones si siguen tapadas */
+.home-container #slider {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  /* Se puede agregar margin-top si hace falta ajustar visualmente */
 }
