@@ -19,10 +19,6 @@ body.body-light .home-container {
 .home-container header {
   flex-shrink: 0;
   width: 100%;
-  z-index: 100;
-  /* Para que esté siempre encima del main */
-  position: relative;
-  /* necesario si agregas efectos de sticky */
 }
 
 /* Main */
@@ -34,8 +30,6 @@ body.body-light .home-container {
   text-align: center;
   width: 100%;
   margin-bottom: 200px;
-  /* espacio para el footer */
-  /* padding-top dinámico se maneja desde Home.jsx inline style */
 }
 
 /* Footer */
@@ -52,32 +46,35 @@ body.body-light .home-container {
   width: 100%;
   min-height: 100vh;
   display: flex;
-  align-items: flex-start;
-  /* no centrado vertical para que no tape header */
+  align-items: center;
   justify-content: center;
   scroll-snap-align: start;
   box-sizing: border-box;
-  padding-top: 2rem;
-  /* separa un poco el contenido del borde superior */
 }
 
+/* Contenido de sección */
 .home-container .section-content {
   display: block;
   text-align: left;
   box-sizing: border-box;
 }
 
-/* Responsividad básica */
+/* Slider principal */
+.home-container #slider {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  /* slider queda arriba, no necesita padding extra */
+}
+
+/* Responsividad */
 @media (max-width: 600px) {
   .home-container main {
     padding-left: 1rem;
     padding-right: 1rem;
-    /* padding-top sigue dinámico desde Home.jsx */
-  }
-
-  .home-container section {
-    padding-top: 1.5rem;
-    /* ajusta visualmente si hace falta */
+    margin-bottom: 150px;
   }
 }
 
@@ -92,7 +89,7 @@ body.body-light .home-container {
   justify-content: center;
 }
 
-/* Secciones tipo página */
+/* Secciones con cards, títulos, etc. */
 .page-section {
   width: 100%;
   display: flex;
@@ -116,27 +113,19 @@ body.body-light .home-container {
   border-left: 6px solid #d4af37;
   border-radius: 4px;
   margin-top: 0;
-  /* el espacio lo maneja el padding-top dinámico del main */
   margin-bottom: 2rem;
   padding: 10px 20px;
   padding-left: 2rem;
   transition: color 0.3s ease, background 0.3s ease;
 }
 
-/* Slider u otras secciones especiales */
-.home-container #slider {
+/* Ajustes opcionales para secciones posteriores */
+.home-container #destacados,
+.home-container #grabados,
+.home-container #menu-opciones {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  /* opcional: margin-top si necesitas ajustar visualmente */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* WhatsAppButton fijo */
-.home-container>main>.whatsapp-button {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  z-index: 90;
-}
+/* Ajustes de espacio dinámico (padding-top) se aplican desde Home.jsx */

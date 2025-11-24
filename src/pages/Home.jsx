@@ -12,7 +12,7 @@ import BombillasPage from './BombillasPage.jsx';
 import TermosPage from './TermosPage.jsx';
 import PanelAdmin from './PanelAdmin.jsx';
 import MenuOpciones from '../components/MenuOpciones.jsx';
-import DestacadosPage from './DestacadosPage.jsx';
+import DestacadosPage from '../DestacadosPage.jsx';
 import TodosLosProductos from './TodosLosProductos.jsx';
 import { useLocation } from "react-router-dom";
 import BusquedaUser from './BusquedaUser.jsx';
@@ -84,26 +84,33 @@ function Home() {
                 <Header handleChange={handleChange} />
             </header>
 
-            {/* Main con padding dinámico para no tapar el contenido */}
-            <main style={{ paddingTop: headerHeight }}>
+            <main>
                 <WhatsAppButton />
+
                 <Routes>
                     <Route path='/' element={
                         <>
+                            {/* Slider principal SIN padding */}
                             <section id='slider'>
                                 <Slider />
                             </section>
-                            <section id='menu-opciones'>
-                                <MenuOpciones />
-                            </section>
-                            <section id='destacados' className='section-content'>
-                                <DestacadosPage products={products} />
-                            </section>
-                            <section id='grabados'>
-                                <Grabados />
-                            </section>
+
+                            {/* Secciones que necesitan padding para no taparse */}
+                            <div style={{ paddingTop: headerHeight, width: '100%' }}>
+                                <section id='menu-opciones'>
+                                    <MenuOpciones />
+                                </section>
+                                <section id='destacados' className='section-content'>
+                                    <DestacadosPage products={products} />
+                                </section>
+                                <section id='grabados'>
+                                    <Grabados />
+                                </section>
+                            </div>
                         </>
                     } />
+
+                    {/* Rutas individuales */}
                     <Route path='/mates' element={<MatesPage products={products} />} />
                     <Route path='/termos' element={<TermosPage products={products} />} />
                     <Route path='/combos' element={<CombosPage products={products} />} />
