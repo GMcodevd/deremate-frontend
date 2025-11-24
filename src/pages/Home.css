@@ -75,6 +75,10 @@ body.body-light .home-container {
   .home-container .seccion-interna {
     padding-top: 180px;
     /* altura del header móvil */
+
+    /* Extra para que títulos no queden tapados */
+    padding-top: 230px;
+    /* 180px original + 50px extra */
   }
 }
 
