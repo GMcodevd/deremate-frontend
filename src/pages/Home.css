@@ -9,18 +9,18 @@
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Cuando el body tiene clase clara */
+/* Body claro */
 body.body-light .home-container {
   background: #e3d2b2 !important;
   color: #1a1a1a !important;
 }
 
-/* Header arriba */
+/* Header */
 .home-container header {
-  flex-shrink: 0; /* Evita que se comprima */
+  flex-shrink: 0;
 }
 
-/* Main ocupa el espacio del medio */
+/* Main */
 .home-container main {
   flex: 1;
   display: flex;
@@ -29,10 +29,9 @@ body.body-light .home-container {
   text-align: center;
   width: 100%;
   margin-bottom: 200px;
-  padding-top: 0; /* Se ajusta desde section-title ahora */
 }
 
-/* Footer abajo */
+/* Footer */
 .home-container footer {
   flex-shrink: 0;
   width: 100%;
@@ -41,6 +40,7 @@ body.body-light .home-container {
   padding: 0;
 }
 
+/* Sections */
 .home-container section {
   width: 100%;
   min-height: 100vh;
@@ -57,19 +57,20 @@ body.body-light .home-container {
   box-sizing: border-box;
 }
 
-/* Responsividad básica */
+/* Responsividad */
 @media (max-width: 600px) {
   .home-container main {
-    padding: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 
+/* Menu opciones */
 #menu-opciones {
   display: block;
   width: 100%;
   padding: 1rem 0;
 }
-
 #menu-opciones .MuiGrid-container {
   justify-content: center;
 }
@@ -85,33 +86,20 @@ body.body-light .home-container {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  
   width: 100%;
   box-sizing: border-box;
-
   font-family: "Inter", system-ui, sans-serif;
   font-weight: 700;
   font-size: 1.2rem;
   text-transform: uppercase;
   color: #fff;
   letter-spacing: 0.5px;
-
   background: rgba(0, 0, 0, 0.5);
   border-left: 6px solid #d4af37;
   border-radius: 4px;
-
-  /* En lugar de margin-top fijo, usamos padding-top dinámico según altura de header */
-  margin-top: 1rem;
+  margin-top: 0; /* ahora el espacio lo maneja padding-top dinámico de main */
   margin-bottom: 2rem;
   padding: 10px 20px;
   padding-left: 2rem;
-
   transition: color 0.3s ease, background 0.3s ease;
-}
-
-/* Ajuste responsive para section-title según altura del header en móviles */
-@media (max-width: 600px) {
-  .page-section .section-title {
-    margin-top: 120px; /* altura aproximada del header móvil */
-  }
 }
