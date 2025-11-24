@@ -21,6 +21,7 @@ import Login from './LoginPage.jsx';
 import PrivateRoute from '../components/PrivateRoute.jsx';
 import Grabados from '../components/Grabados.jsx';
 import ContactoPage from './ContactoPage.jsx';
+import { Toolbar } from '@mui/material';
 
 
 function Home() {
@@ -83,7 +84,9 @@ function Home() {
 
         <div className='home-container'>
             <header>
-                <Header handleChange={handleChange}></Header>
+                <Header handleChange={handleChange} />
+                {/* Espaciador para que el contenido no quede tapado por el header */}
+                <Toolbar />
             </header>
 
             <main>
