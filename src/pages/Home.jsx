@@ -12,7 +12,7 @@ import BombillasPage from './BombillasPage.jsx';
 import TermosPage from './TermosPage.jsx';
 import PanelAdmin from './PanelAdmin.jsx';
 import MenuOpciones from '../components/MenuOpciones.jsx';
-import DestacadosPage from '../DestacadosPage.jsx';
+import DestacadosPage from './DestacadosPage.jsx';
 import TodosLosProductos from './TodosLosProductos.jsx';
 import { useLocation } from "react-router-dom";
 import BusquedaUser from './BusquedaUser.jsx';
