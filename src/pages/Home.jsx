@@ -52,7 +52,7 @@ function Home() {
     const [searchTerm, setSearchTerm] = useState('');
     const handleChange = (Term) => setSearchTerm(Term);
 
-    useEffect(() => { fetchData(); }, [])
+    useEffect(() => { fetchData(); }, []);
 
     const fetchData = async (param) => {
         try {
@@ -95,8 +95,8 @@ function Home() {
                                 <Slider />
                             </section>
 
-                            {/* Secciones que necesitan padding para no taparse */}
-                            <div style={{ paddingTop: headerHeight, width: '100%' }}>
+                            {/* Secciones de inicio sin empujar el slider */}
+                            <div className='inicio-secciones'>
                                 <section id='menu-opciones'>
                                     <MenuOpciones />
                                 </section>
@@ -110,18 +110,54 @@ function Home() {
                         </>
                     } />
 
-                    {/* Rutas individuales */}
-                    <Route path='/mates' element={<MatesPage products={products} />} />
-                    <Route path='/termos' element={<TermosPage products={products} />} />
-                    <Route path='/combos' element={<CombosPage products={products} />} />
-                    <Route path='/bombillas' element={<BombillasPage products={products} />} />
-                    <Route path='/accesorios' element={<AccesoriosPage products={products} />} />
-                    <Route path='/busqueda' element={<BusquedaUser products={searchTerm ? filteredProducts : products} searchTerm={searchTerm} />} />
-                    <Route path='/todos-los-productos' element={<TodosLosProductos products={products} />} />
-                    <Route path='/contacto' element={<ContactoPage />} />
+                    {/* Rutas internas: se empujan según headerHeight */}
+                    <Route path='/mates' element={
+                        <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                            <MatesPage products={products} />
+                        </div>
+                    } />
+                    <Route path='/termos' element={
+                        <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                            <TermosPage products={products} />
+                        </div>
+                    } />
+                    <Route path='/combos' element={
+                        <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                            <CombosPage products={products} />
+                        </div>
+                    } />
+                    <Route path='/bombillas' element={
+                        <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                            <BombillasPage products={products} />
+                        </div>
+                    } />
+                    <Route path='/accesorios' element={
+                        <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                            <AccesoriosPage products={products} />
+                        </div>
+                    } />
+                    <Route path='/busqueda' element={
+                        <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                            <BusquedaUser products={searchTerm ? filteredProducts : products} searchTerm={searchTerm} />
+                        </div>
+                    } />
+                    <Route path='/todos-los-productos' element={
+                        <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                            <TodosLosProductos products={products} />
+                        </div>
+                    } />
+                    <Route path='/contacto' element={
+                        <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                            <ContactoPage />
+                        </div>
+                    } />
                     <Route path='/login' element={<Login />} />
                     <Route element={<PrivateRoute />}>
-                        <Route path='/panel' element={<PanelAdmin products={products} setProducts={setProducts} />} />
+                        <Route path='/panel' element={
+                            <div className='seccion-interna' style={{ paddingTop: headerHeight }}>
+                                <PanelAdmin products={products} setProducts={setProducts} />
+                            </div>
+                        } />
                     </Route>
                 </Routes>
             </main>

@@ -29,7 +29,7 @@ body.body-light .home-container {
   text-align: center;
   width: 100%;
   margin-bottom: 200px;
-  /* sin padding-top global, lo manejamos por sección */
+  /* SIN padding global: se maneja por sección */
 }
 
 /* Footer */
@@ -41,37 +41,40 @@ body.body-light .home-container {
   padding: 0;
 }
 
-/* Sections */
-.home-container section {
+/* Slider del inicio - pegado al header */
+.home-container #slider {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  /* sin margin-top, queda pegado al header */
+}
+
+/* Secciones internas de inicio que necesitan padding */
+.home-container .inicio-secciones {
+  width: 100%;
+  padding-top: 0;
+  /* slider ya está arriba, no se empuja nada aquí */
+}
+
+/* Rutas internas: todas las secciones que no sean el slider */
+.home-container .seccion-interna {
   width: 100%;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  scroll-snap-align: start;
   box-sizing: border-box;
   padding-top: 150px;
-  /* PC: espacio para que las secciones no queden debajo del header */
-}
-
-/* Sección destacada de contenido */
-.home-container .section-content {
-  display: block;
-  text-align: left;
-  box-sizing: border-box;
+  /* espacio para que no queden tapadas por header */
 }
 
 /* Responsividad */
 @media (max-width: 600px) {
-  .home-container main {
-    /* solo padding lateral para móviles */
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .home-container section {
+  .home-container .seccion-interna {
     padding-top: 180px;
-    /* móvil: altura del header ajustada */
+    /* altura del header móvil */
   }
 }
 
@@ -110,19 +113,8 @@ body.body-light .home-container {
   border-left: 6px solid #d4af37;
   border-radius: 4px;
   margin-top: 0;
-  /* el espacio superior lo maneja padding-top de la sección */
   margin-bottom: 2rem;
   padding: 10px 20px;
   padding-left: 2rem;
   transition: color 0.3s ease, background 0.3s ease;
-}
-
-/* Opcional: ajustar slider si hace falta */
-.home-container #slider {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  /* sin margin-top, queda pegado al header */
 }
