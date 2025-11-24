@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './Home.css';
 import Slider from '../components/Slider';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { getAllProducts } from '../api/mateService.js';
 import MatesPage from './MatesPage.jsx';
 import AccesoriosPage from './AccesoriosPage.jsx';
@@ -14,27 +14,52 @@ import PanelAdmin from './PanelAdmin.jsx';
 import MenuOpciones from '../components/MenuOpciones.jsx';
 import DestacadosPage from './DestacadosPage.jsx';
 import TodosLosProductos from './TodosLosProductos.jsx';
+import { useLocation } from "react-router-dom";
 import BusquedaUser from './BusquedaUser.jsx';
 import WhatsAppButton from '../components/WhatsAppButton.jsx';
 import Login from './LoginPage.jsx';
 import PrivateRoute from '../components/PrivateRoute.jsx';
 import Grabados from '../components/Grabados.jsx';
 import ContactoPage from './ContactoPage.jsx';
-import { Toolbar } from '@mui/material';
 
 function Home() {
     const location = useLocation();
+
+    // Ref para medir altura real del header
     const headerRef = useRef(null);
-    const mainRef = useRef(null);
+    const [headerHeight, setHeaderHeight] = useState(0);
+
+    useEffect(() => {
+        if (location.pathname === "/") {
+            document.body.className = "body-dark";
+        } else {
+            document.body.className = "body-light";
+        }
+    }, [location]);
+
+    useEffect(() => {
+        // Ajusta altura del header dinámicamente
+        if (headerRef.current) {
+            setHeaderHeight(headerRef.current.offsetHeight);
+        }
+
+        // Recalcula si la ventana cambia de tamaño
+        const handleResize = () => {
+            if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
+        };
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-
     const handleChange = (Term) => setSearchTerm(Term);
 
-    const fetchData = async () => {
+    useEffect(() => { fetchData(); }, [])
+
+    const fetchData = async (param) => {
         try {
-            const response = await getAllProducts();
+            const response = await getAllProducts(param);
             if (!Array.isArray(response.data)) {
                 setProducts([]);
                 return;
@@ -45,27 +70,6 @@ function Home() {
             setProducts([]);
         }
     };
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    useEffect(() => {
-        // Cambiar clases según ruta
-        document.body.className = location.pathname === "/" ? "body-dark" : "body-light";
-    }, [location]);
-
-    useEffect(() => {
-        const adjustMainPadding = () => {
-            if (headerRef.current && mainRef.current) {
-                const headerHeight = headerRef.current.offsetHeight;
-                mainRef.current.style.paddingTop = `${headerHeight + 16}px`; // +16px margen extra
-            }
-        };
-        adjustMainPadding();
-        window.addEventListener('resize', adjustMainPadding);
-        return () => window.removeEventListener('resize', adjustMainPadding);
-    }, []);
 
     const filteredProducts = products.filter((p) => {
         const term = searchTerm.toLowerCase().trim();
@@ -78,23 +82,31 @@ function Home() {
 
     return (
         <div className='home-container'>
+            {/* Header con ref */}
             <header ref={headerRef}>
                 <Header handleChange={handleChange} />
-                <Toolbar />
             </header>
 
-            <main ref={mainRef}>
+            {/* Main con padding dinámico para no tapar el contenido */}
+            <main style={{ paddingTop: headerHeight }}>
                 <WhatsAppButton />
                 <Routes>
                     <Route path='/' element={
                         <>
-                            <section id='slider'><Slider /></section>
-                            <section id='menu-opciones'><MenuOpciones /></section>
-                            <section id='destacados' className='section-content'><DestacadosPage products={products} /></section>
-                            <section id='grabados'><Grabados /></section>
+                            <section id='slider'>
+                                <Slider />
+                            </section>
+                            <section id='menu-opciones'>
+                                <MenuOpciones />
+                            </section>
+                            <section id='destacados' className='section-content'>
+                                <DestacadosPage products={products} />
+                            </section>
+                            <section id='grabados'>
+                                <Grabados />
+                            </section>
                         </>
                     } />
-
                     <Route path='/mates' element={<MatesPage products={products} />} />
                     <Route path='/termos' element={<TermosPage products={products} />} />
                     <Route path='/combos' element={<CombosPage products={products} />} />
@@ -104,7 +116,6 @@ function Home() {
                     <Route path='/todos-los-productos' element={<TodosLosProductos products={products} />} />
                     <Route path='/contacto' element={<ContactoPage />} />
                     <Route path='/login' element={<Login />} />
-
                     <Route element={<PrivateRoute />}>
                         <Route path='/panel' element={<PanelAdmin products={products} setProducts={setProducts} />} />
                     </Route>
