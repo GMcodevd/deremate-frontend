@@ -29,10 +29,7 @@ body.body-light .home-container {
   text-align: center;
   width: 100%;
   margin-bottom: 200px;
-
-  /* PADDING DINÁMICO PARA NO TAPAR SECCIONES */
-  padding-top: 150px;
-  /* PC: ajustar según altura del header */
+  /* padding-top se maneja ahora en las secciones */
 }
 
 /* Footer */
@@ -49,12 +46,18 @@ body.body-light .home-container {
   width: 100%;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  /* empuja contenido hacia arriba, no centrado */
   justify-content: center;
   scroll-snap-align: start;
   box-sizing: border-box;
+
+  /* ESPACIO SUPERIOR PARA NO TAPAR HEADER */
+  padding-top: 150px;
+  /* PC: ajustar según altura del header */
 }
 
+/* Section content */
 .home-container .section-content {
   display: block;
   text-align: left;
@@ -66,10 +69,11 @@ body.body-light .home-container {
   .home-container main {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
 
-    /* PADDING DINÁMICO PARA NO TAPAR SECCIONES EN MÓVIL */
+  .home-container section {
     padding-top: 180px;
-    /* móvil: ajustar según altura del header */
+    /* Móvil: ajustar según altura del header */
   }
 }
 
@@ -107,19 +111,19 @@ body.body-light .home-container {
   border-left: 6px solid #d4af37;
   border-radius: 4px;
   margin-top: 0;
-  /* el espacio superior lo maneja padding-top de main */
+  /* el espacio superior lo maneja padding-top de la sección */
   margin-bottom: 2rem;
   padding: 10px 20px;
   padding-left: 2rem;
   transition: color 0.3s ease, background 0.3s ease;
 }
 
-/* Opcional: ajustar slider u otras secciones si siguen tapadas */
+/* Slider u otras secciones que necesiten ajustes finos */
 .home-container #slider {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  /* Se puede agregar margin-top si hace falta ajustar visualmente */
+  /* margin-top opcional si se necesita empujar más visualmente */
 }
