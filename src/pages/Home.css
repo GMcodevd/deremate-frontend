@@ -18,7 +18,6 @@ body.body-light .home-container {
 /* Header */
 .home-container header {
   flex-shrink: 0;
-  width: 100%;
 }
 
 /* Main */
@@ -30,6 +29,7 @@ body.body-light .home-container {
   text-align: center;
   width: 100%;
   margin-bottom: 200px;
+  /* sin padding-top global, lo manejamos por sección */
 }
 
 /* Footer */
@@ -50,31 +50,28 @@ body.body-light .home-container {
   justify-content: center;
   scroll-snap-align: start;
   box-sizing: border-box;
+  padding-top: 150px;
+  /* PC: espacio para que las secciones no queden debajo del header */
 }
 
-/* Contenido de sección */
+/* Sección destacada de contenido */
 .home-container .section-content {
   display: block;
   text-align: left;
   box-sizing: border-box;
 }
 
-/* Slider principal */
-.home-container #slider {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  /* slider queda arriba, no necesita padding extra */
-}
-
 /* Responsividad */
 @media (max-width: 600px) {
   .home-container main {
+    /* solo padding lateral para móviles */
     padding-left: 1rem;
     padding-right: 1rem;
-    margin-bottom: 150px;
+  }
+
+  .home-container section {
+    padding-top: 180px;
+    /* móvil: altura del header ajustada */
   }
 }
 
@@ -89,7 +86,7 @@ body.body-light .home-container {
   justify-content: center;
 }
 
-/* Secciones con cards, títulos, etc. */
+/* Secciones internas */
 .page-section {
   width: 100%;
   display: flex;
@@ -113,19 +110,19 @@ body.body-light .home-container {
   border-left: 6px solid #d4af37;
   border-radius: 4px;
   margin-top: 0;
+  /* el espacio superior lo maneja padding-top de la sección */
   margin-bottom: 2rem;
   padding: 10px 20px;
   padding-left: 2rem;
   transition: color 0.3s ease, background 0.3s ease;
 }
 
-/* Ajustes opcionales para secciones posteriores */
-.home-container #destacados,
-.home-container #grabados,
-.home-container #menu-opciones {
+/* Opcional: ajustar slider si hace falta */
+.home-container #slider {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  /* sin margin-top, queda pegado al header */
 }
-
-/* Ajustes de espacio dinámico (padding-top) se aplican desde Home.jsx */
