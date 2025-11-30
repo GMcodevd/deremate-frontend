@@ -146,11 +146,7 @@ function ProductCard({ products }) {
         >
           <img
             onClick={(e) => e.stopPropagation()}
-            src={
-              products.image?.startsWith('http')
-                ? products.image
-                : `${import.meta.env.VITE_API_URL}/${products.image}`
-            }
+            src={products.image}
             alt={products.name}
             style={{
               maxWidth: '90%',
@@ -158,6 +154,7 @@ function ProductCard({ products }) {
               borderRadius: '10px',
             }}
           />
+
         </Box>
       </Modal>
     </>

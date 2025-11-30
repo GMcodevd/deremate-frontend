@@ -12,29 +12,22 @@ import CloseIcon from '@mui/icons-material/Close';
 function FormProducts(props) {
   const categories = ["mate", "termo", "bombilla", "combo", "accesorio", "destacado"];
 
+  // 🔥 ahora devuelve directamente la URL (Cloudinary)
   const getImageUrl = (image) => {
-    if (!image) return null;
-
-    // Si ya es URL completa (caso URL manual)
-    if (image.startsWith("http://") || image.startsWith("https://")) {
-      return image;
-    }
-
-    // Caso filename guardado en la BD
-    return `https://deremate-backend.onrender.com/uploads/${image}`;
+    return image || null;
   };
 
   const [product, setProduct] = useState({
     name: '',
     category: '',
-    image: '', // url existente (cuando editás)
+    image: '',
     description: '',
     price: 0,
     stock: 0
   });
 
-  const [file, setFile] = useState(null); // archivo seleccionado por el usuario
-  const [preview, setPreview] = useState(null); // url de preview (objectURL o image url existente)
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
 
   useEffect(() => {
     if (props.productEdit && Object.keys(props.productEdit).length > 0) {
@@ -67,22 +60,20 @@ function FormProducts(props) {
     if (selected) {
       setFile(selected);
       const objectUrl = URL.createObjectURL(selected);
-      setPreview(objectUrl); // preview directo del archivo nuevo
+      setPreview(objectUrl);
     } else {
       setFile(null);
-      setPreview(getImageUrl(product.image)); // vuelve a la imagen existente
+      setPreview(getImageUrl(product.image));
     }
   };
 
-
-  // permitir quitar la imagen seleccionada y volver a la url existente (en edición)
   const handleRemoveSelectedFile = () => {
     if (preview && preview.startsWith('blob:')) {
       URL.revokeObjectURL(preview);
     }
     setFile(null);
     setPreview(getImageUrl(product.image) || null);
-    // también limpiar input file (si querés forzar)
+
     const input = document.getElementById('product-image-input');
     if (input) input.value = '';
   };
@@ -90,7 +81,6 @@ function FormProducts(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Armar FormData
     const formData = new FormData();
     formData.append('name', product.name);
     formData.append('category', product.category);
@@ -98,17 +88,13 @@ function FormProducts(props) {
     formData.append('price', product.price);
     formData.append('stock', product.stock);
 
-    // Si hay archivo nuevo, lo añadimos; si no, enviamos la url actual (para que el backend la use)
     if (file) {
-      formData.append('imageFile', file); // nombre: imageFile (consistente con backend)
+      formData.append('imageFile', file);
     } else if (product.image) {
-      // enviamos la url actual para edición (el backend puede interpretarla)
       formData.append('imageUrl', product.image);
     }
 
-    // Si estamos editando -> update
     if (product._id !== undefined) {
-      // update espera (id, formData)
       updateProduct(product._id, formData)
         .then((response) => {
           if (response.data) {
@@ -123,7 +109,6 @@ function FormProducts(props) {
           alert('Error al actualizar producto');
         });
     } else {
-      // create espera (formData)
       createProduct(formData)
         .then((response) => {
           if (response.data) {
@@ -161,7 +146,6 @@ function FormProducts(props) {
               ))}
             </TextField>
 
-            {/* Input de archivo */}
             <Box sx={{ mt: 1, mb: 1, display: 'flex', alignItems: 'center', gap: 1 }}>
               <input
                 id="product-image-input"
@@ -177,7 +161,6 @@ function FormProducts(props) {
               )}
             </Box>
 
-            {/* Preview */}
             {preview && (
               <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 2 }}>
                 <img src={preview} alt="preview" style={{ width: 120, height: 120, objectFit: 'cover', borderRadius: 8 }} />
