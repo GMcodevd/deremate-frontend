@@ -66,7 +66,14 @@ function Home() {
         );
     });
 
-    const sectionPadding = headerHeight + extraPadding;
+    const isMobile = window.innerWidth <= 600;
+
+    // En mobile el header es mucho más alto → le sumamos un mínimo
+    const sectionPadding =
+        headerHeight + extraPadding < (isMobile ? 230 : 150)
+            ? (isMobile ? 230 : 150)
+            : headerHeight + extraPadding;
+
 
     return (
         <div className='home-container'>
