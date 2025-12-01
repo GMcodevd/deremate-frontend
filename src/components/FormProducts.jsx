@@ -12,7 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 function FormProducts(props) {
   const categories = ["mate", "termo", "bombilla", "combo", "accesorio", "destacado"];
 
-  // 🔥 ahora devuelve directamente la URL (Cloudinary)
+  // ahora devuelve directamente la URL (Cloudinary)
   const getImageUrl = (image) => {
     return image || null;
   };
