@@ -99,7 +99,7 @@ function FormProducts(props) {
         .then((response) => {
           if (response.data) {
             props.setProducts((prev) =>
-              prev.map(p => p._id === product._id ? response.data.producto : p)
+              prev.map(p => p._id === product._id ? response.data : p)
             );
             props.handleClose();
           }
@@ -112,7 +112,7 @@ function FormProducts(props) {
       createProduct(formData)
         .then((response) => {
           if (response.data) {
-            props.setProducts((prev) => [...prev, response.data.producto]);
+            props.setProducts((prev) => [...prev, response.data]);
             props.handleClose();
           }
         })
