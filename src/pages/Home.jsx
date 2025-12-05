@@ -70,8 +70,8 @@ function Home() {
 
     // En mobile el header es mucho más alto → le sumamos un mínimo
     const sectionPadding =
-        headerHeight + extraPadding < (isMobile ? 230 : 150)
-            ? (isMobile ? 230 : 150)
+        headerHeight + extraPadding < (isMobile ? 270 : 150)
+            ? (isMobile ? 270 : 150)
             : headerHeight + extraPadding;
 
 
