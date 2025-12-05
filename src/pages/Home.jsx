@@ -148,7 +148,10 @@ function Home() {
                             <ContactoPage />
                         </div>
                     } />
-                    <Route path='/login' element={<Login />} />
+                    <Route path='/login' element={
+                        <div className='seccion-interna' style={{ paddingTop: sectionPadding }}>
+                            <Login />
+                        </div>} />
                     <Route element={<PrivateRoute />}>
                         <Route path='/panel' element={
                             <div className='seccion-interna' style={{ paddingTop: sectionPadding }}>
