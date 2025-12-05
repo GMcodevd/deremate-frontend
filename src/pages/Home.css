@@ -58,29 +58,34 @@ body.body-light .home-container {
   /* slider ya está arriba, no se empuja nada aquí */
 }
 
+/* ---------------------------------------------------- */
+/* ➡️ MEJORAS EN RUTAS INTERNAS              */
+/* ---------------------------------------------------- */
+
 /* Rutas internas: todas las secciones que no sean el slider */
 .home-container .seccion-interna {
   width: 100%;
-  min-height: 100vh;
+  /* min-height: 100vh; Puede eliminarse si el contenido es largo */
+  
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column; /* ⬅️ CRUCIAL: Contenido fluye de arriba a abajo */
+  align-items: center; /* Mantenido: Centra el contenedor de las cards horizontalmente */
+  justify-content: flex-start; /* ⬅️ CRUCIAL: El contenido comienza desde ARRIBA (no en el centro) */
   box-sizing: border-box;
-  padding-top: 150px;
-  /* espacio para que no queden tapadas por header */
+  
+  /* Se eliminan los valores estáticos de padding-top para usar el valor dinámico de React */
+  /* padding-top: 150px; */ 
 }
 
 /* Responsividad */
 @media (max-width: 600px) {
   .home-container .seccion-interna {
-    padding-top: 180px;
-    /* altura del header móvil */
-
-    /* Extra para que títulos no queden tapados */
-    padding-top: 230px;
-    /* 180px original + 50px extra */
+    /* Las reglas estáticas de padding-top se eliminan. */
+    /* La altura será calculada dinámicamente por la lógica de React (sectionPadding). */
   }
 }
+
+/* ---------------------------------------------------- */
 
 /* Menu opciones */
 #menu-opciones {
