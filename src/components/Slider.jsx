@@ -42,7 +42,8 @@ export default function Slider() {
                 backgroundImage: `url(${slide.src})`,
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
-                backgroundSize: "cover", // no se deforma
+                backgroundSize: {xs: 'cover', md: 'contain'}, //pantallas grandes y móviles
+                bgcolor: '#1a1a1a'
               }}
             >
               {/* Overlay oscuro */}
