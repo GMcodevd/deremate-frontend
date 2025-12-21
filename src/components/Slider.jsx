@@ -8,11 +8,11 @@ import './Slider.css'
 
 export default function Slider() {
   const slides = [
-    { src: "/gato1.png", title: "Productos destacados" },
-    { src: "/gato2.png", title: "Ofertas imperdibles" },
-    { src: "/perritoa.png", title: "Lo nuevo en tecnología" },
-    { src: "/perritob.png", title: "Para tu mascota" },
-    { src: "/perritoc.png", title: "Descubrí más" },
+    { src: "/menu1.png", title: "Productos destacados" },
+    { src: "/menu2.png", title: "Ofertas imperdibles" },
+    { src: "/menu3.png", title: "Mates de calidad" },
+    { src: "/menu4.png", title: "Para tu momento especial" },
+    { src: "/menu5.png", title: "Descubrí más" },
   ];
 
   return (
