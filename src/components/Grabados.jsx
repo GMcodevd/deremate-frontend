@@ -8,11 +8,9 @@ import './Slider.css'
 
 export default function Grabados() {
     const slides = [
-        { src: "/gato1.png", title: "A pedido del cliente" },
-        { src: "/gato2.png", title: "Ofertas imperdibles" },
-        { src: "/perritoa.png", title: "Lo nuevo en tecnología" },
-        { src: "/perritob.png", title: "Para tu mascota" },
-        { src: "/perritoc.png", title: "Descubrí más" },
+        { src: "/mategrabado1.png", title: "A pedido del cliente" },
+        { src: "/mategrabado2.png", title: "Ofertas imperdibles" },
+        { src: "/mategrabado3.png", title: "Ideal para vos o regalar" },
     ];
 
     return (
