@@ -26,6 +26,7 @@ export default function Grabados() {
             <Swiper
                 modules={[Navigation, Pagination]}
                 navigation
+                loop
                 pagination={{ clickable: true }}
                 style={{ height: "100%", width: "100%", padding: 0, margin: 0 }}
             >
@@ -39,7 +40,9 @@ export default function Grabados() {
                                 backgroundImage: `url(${slide.src})`,
                                 backgroundPosition: "center",
                                 backgroundRepeat: "no-repeat",
-                                backgroundSize: "cover", // no se deforma
+                                backgroundSize: { xs: 'cover', md: 'contain' }, //pantallas grandes y móviles
+                                bgcolor: '#1a1a1a',
+                                ackgroundRepeat: "no-repeat",
                             }}
                         >
                             {/* Overlay oscuro */}

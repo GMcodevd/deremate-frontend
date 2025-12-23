@@ -8,12 +8,12 @@ function MenuOpciones() {
     const navigate = useNavigate();
 
     const opciones = [
-        { titulo: "Mates", img: "/gato1.png", link: "/mates" },
-        { titulo: "Termos", img: "/gato2.png", link: "/termos" },
-        { titulo: "Bombillas", img: "/perritoa.png", link: "/bombillas" },
-        { titulo: "Accesorios", img: "/perritob.png", link: "/accesorios" },
-        { titulo: "Combos", img: "/perritoc.png", link: "/combos" },
-        { titulo: "Todos los productos", img: "/perritoa.png", link: "/todos-los-productos" }
+        { titulo: "Mates", img: "/mates.png", link: "/mates" },
+        { titulo: "Termos", img: "/termos.png", link: "/termos" },
+        { titulo: "Bombillas", img: "/bombillas.png", link: "/bombillas" },
+        { titulo: "Accesorios", img: "/accesorios.png", link: "/accesorios" },
+        { titulo: "Combos", img: "/combos.png", link: "/combos" },
+        { titulo: "Todos los productos", img: "/todos-los-productos.png", link: "/todos-los-productos" }
     ];
 
     return (
@@ -30,8 +30,10 @@ function MenuOpciones() {
                             cursor: "pointer",
                             width: "100%",
                             overflow: "hidden",
+                            backgroundRepeat: "no-repeat",
                             backgroundImage: `url(${op.img})`,
-                            backgroundSize: "cover",
+                            backgroundSize: { xs: 'cover', md: 'contain' }, //pantallas grandes y móviles
+                            bgcolor: '#1a1a1a',
                             backgroundPosition: "center",
                             transition: "transform 0.3s, filter 0.3s",
                             "&:hover": {
